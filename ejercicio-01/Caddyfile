@@ -1,0 +1,4 @@
+:80 {
+    root * /home/kiari/CI-0137-ejercicios-C11208/ejercicio-01
+    file_server
+}
