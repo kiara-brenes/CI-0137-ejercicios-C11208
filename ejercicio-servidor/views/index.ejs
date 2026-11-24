@@ -1,0 +1,148 @@
+<%- include('partials/head', { titulo: 'Currículum - Kiara Brenes Díaz' }) %>
+<body>
+
+    <header class="encabezado">
+        <button class="boton-tema" id="boton-tema" type="button" aria-pressed="false">Modo oscuro</button>
+
+        <h1><%= persona.nombre %></h1>
+        <p class="rol"><%= persona.rol %></p>
+
+        <img class="foto" src="/img/foto.jpg" alt="Foto de perfil de Kiara, sonriendo, con cabello rubio ondulado y suéter rojo" width="180" height="240">
+
+        <address>
+            <ul class="contacto">
+                <li>Correo: <a href="mailto:<%= persona.correo %>"><%= persona.correo %></a></li>
+                <li>Teléfono: <a href="tel:+506<%= persona.telefono.replace('-', '') %>"><%= persona.telefono %></a></li>
+                <li>GitHub: <a href="https://github.com/<%= persona.github %>" target="_blank" rel="noopener">github.com/<%= persona.github %></a></li>
+                <li><%= persona.ubicacion %></li>
+            </ul>
+        </address>
+    </header>
+
+    <main class="contenido">
+
+        <section class="perfil">
+            <h2>Perfil</h2>
+            <p><%= persona.perfil %></p>
+        </section>
+
+        <section class="experiencia">
+            <h2>Experiencia</h2>
+            <% experiencia.forEach((trabajo) => { %>
+            <article>
+                <h3><%= trabajo.puesto %></h3>
+                <p class="lugar"><%= trabajo.lugar %></p>
+                <p><%= trabajo.descripcion %></p>
+                <ul>
+                    <% trabajo.tareas.forEach((tarea) => { %>
+                    <li><%= tarea %></li>
+                    <% }) %>
+                </ul>
+            </article>
+            <% }) %>
+        </section>
+
+        <section class="formacion">
+            <h2>Formación académica</h2>
+            <% formacion.forEach((estudio) => { %>
+            <article>
+                <h3><%= estudio.titulo %></h3>
+                <p class="lugar"><%= estudio.institucion %></p>
+                <p class="lugar"><%= estudio.fechas %></p>
+                <p><%= estudio.descripcion %></p>
+            </article>
+            <% }) %>
+        </section>
+
+        <section class="certificaciones">
+            <h2>Certificaciones</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Certificación</th>
+                        <th>Institución</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% certificaciones.forEach((cert) => { %>
+                    <tr>
+                        <td><%= cert.nombre %></td>
+                        <td><%= cert.institucion %></td>
+                        <td><%= cert.fecha %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="habilidades">
+            <h2>Habilidades</h2>
+
+            <h3>Lenguajes de programación</h3>
+            <ul class="lenguajes">
+                <% lenguajes.forEach((h) => { %>
+                <li><%= h.nombre %></li>
+                <% }) %>
+            </ul>
+
+            <h3>Otras habilidades técnicas</h3>
+            <ul>
+                <% tecnicas.forEach((h) => { %>
+                <li><%= h.nombre %></li>
+                <% }) %>
+            </ul>
+
+            <h3>Habilidades blandas</h3>
+            <ul>
+                <% blandas.forEach((h) => { %>
+                <li><%= h.nombre %></li>
+                <% }) %>
+            </ul>
+        </section>
+
+        <section class="idiomas">
+            <h2>Idiomas</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Idioma</th>
+                        <th>Nivel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% idiomas.forEach((item) => { %>
+                    <tr>
+                        <td><%= item.idioma %></td>
+                        <td><%= item.nivel %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="contacto-form" id="contacto">
+            <h2>Contacto</h2>
+            <p>¿Quiere ponerse en contacto conmigo? Escríbame un mensaje.</p>
+
+            <% if (error) { %>
+            <p class="mensaje-error"><%= error %></p>
+            <% } %>
+
+            <form class="formulario" action="/contacto#contacto" method="post">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="<%= valores.nombre ?? '' %>" required>
+
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" value="<%= valores.correo ?? '' %>" required>
+
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" required><%= valores.mensaje ?? '' %></textarea>
+
+                <button class="boton" type="submit">Enviar mensaje</button>
+            </form>
+        </section>
+
+    </main>
+
+<%- include('partials/pie') %>

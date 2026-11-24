@@ -1,0 +1,16 @@
+<%- include('partials/head', { titulo: 'Mensaje enviado - Kiara Brenes Díaz' }) %>
+<body>
+
+    <header class="encabezado">
+        <button class="boton-tema" id="boton-tema" type="button" aria-pressed="false">Modo oscuro</button>
+        <h1>¡Gracias, <%= nombre %>!</h1>
+        <p class="rol">Su mensaje se envió correctamente. Le responderé lo antes posible.</p>
+    </header>
+
+    <main class="contenido">
+        <section class="aviso">
+            <p><a href="/">Volver al currículum</a></p>
+        </section>
+    </main>
+
+<%- include('partials/pie') %>
